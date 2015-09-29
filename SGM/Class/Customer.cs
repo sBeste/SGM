@@ -4,53 +4,53 @@ namespace SGM
 {
 	public class Customer
 	{
-		private string firstName;
-		private string lastName;
-		private int age;
-		private int money;
+		public string name;
+		protected double budget;
+		protected static int customerNumber;
 
-		public Customer ()
+
+
+		/**
+		 * Kundenbudget wird gesetzt
+         * Kundennamne setzen, falls kein Name gesetzt wird,
+         * wird eine Kundenzahl/Id zugeordnet.
+         */
+		public Customer (double budget, string name = "")
 		{
+			this.budget = budget;
+
+			if (!name || name == "") {
+				string number = customerNumber.ToString();
+				this.name = number;
+				customerNumber ++;
+			} else {
+				this.name = name;
+			}
 		}
 
-		public void setFirstName(string text)
-		{
-			this.firstName = text;
+
+		/**
+         * Kundennamne wird zurückgegeben
+         * bzw. ID
+         */
+		public string getName(){
+			return this.name;
 		}
 
-		public string getFirstName()
-		{
-			return this.firstName;
+		/**
+         * Berechnung neues Budget nach ausgaben
+         */
+		public void costs(double price){
+			double budget = this.budget;
+			budget = budget - price;
+			this.budget = budget;
 		}
 
-		public void setLastName(string text)
-		{
-			this.lastName = text;
-		}
-
-		public string getLastName()
-		{
-			return this.lastName;
-		}
-
-		public void setAge(int number){
-
-			this.age = number;
-		}
-
-		public int getAge(){
-
-			return this.age;
-		}
-
-		public void setMoney(int number){
-
-			this.money = number;
-		}
-
-		public int getMoney(){
-
-			return this.money;
+		/**
+         * Gibt Budget zurück 
+         */
+		public double getBudget(){
+			return this.budget;
 		}
 	}
 }
