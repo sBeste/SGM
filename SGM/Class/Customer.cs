@@ -6,28 +6,29 @@ namespace SGM
 	{
 		public string name;
 		protected double budget;
-		protected static int customerNumber;
+		protected static int customerNumber = 1;
 
 
+
+		public Customer ()
+		{
+			//this.budget = budget;
+
+		}
 
 		/**
-		 * Kundenbudget wird gesetzt
          * Kundennamne setzen, falls kein Name gesetzt wird,
          * wird eine Kundenzahl/Id zugeordnet.
          */
-		public Customer (double budget, string name = "")
-		{
-			this.budget = budget;
-
-			if (!name || name == "") {
+		public void setName(string name){
+			if (name == "") {
 				string number = customerNumber.ToString();
 				this.name = number;
 				customerNumber ++;
 			} else {
 				this.name = name;
-			}
+			}			
 		}
-
 
 		/**
          * Kundennamne wird zurückgegeben
@@ -40,10 +41,21 @@ namespace SGM
 		/**
          * Berechnung neues Budget nach ausgaben
          */
-		public void costs(double price){
+		public void pay(double price){
 			double budget = this.budget;
-			budget = budget - price;
-			this.budget = budget;
+			if (price > budget) {
+				throw new CustomerNotEnoughMoneyException();
+			} else {
+				budget = budget - price;
+				this.budget = budget;
+			}
+		}
+
+		/**
+		 * Setzt das Budget des Kunden
+		 */
+		public void setBudget(double budget){
+			this.budget = budget;		
 		}
 
 		/**
@@ -52,6 +64,16 @@ namespace SGM
 		public double getBudget(){
 			return this.budget;
 		}
+
+		/**
+		 * Gibt Bestllungsliste zurück
+		 */
+
+		/**
+		public OrderList<Order> getOrderList(){
+			return orderList;
+		}
+		*/
 	}
 }
 

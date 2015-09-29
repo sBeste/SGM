@@ -73,31 +73,19 @@ namespace SGM
 			string buffer;
 			Customer customer = new Customer ();
 
-
-			output.OutputText ("Enter Customer's First Name:");
-			buffer = input.InputText ();
-			customer.setFirstName (buffer);
-			buffer = customer.getFirstName ();
-			output.OutputText ("First Name:	" + buffer);
-
-			output.OutputText ("Enter Customer's Last Name:");
-			customer.setLastName (input.InputText ());
-			buffer = customer.getLastName ();
-			output.OutputText ("Last Name:	" + buffer);
-
-			buffer = customer.getFirstName () + " " + customer.getLastName ();
+			output.OutputText ("Enter Customer's Fullname:");
+			buffer = input.InputText();
+			customer.setName (buffer);
+			buffer = customer.getName ();
 			output.OutputText ("Customer's Full Name:" + buffer);
 
-			output.OutputText ("Enter Customer's Age:");
-			customer.setAge (input.InputNumber ());
-			output.OutputText (string.Format ("Customer's Age:\t{0}", customer.getAge ()));
-
-			output.OutputText ("Enter Customer's Money:");
-			customer.setMoney (input.InputNumber ());
-			output.OutputText (string.Format ("Customer's Money:\t{0}", customer.getMoney ()));
+			output.OutputText ("Enter Budget:");
+			buffer = input.InputText();
+			customer.setBudget (double.Parse(buffer));
+			buffer = customer.getBudget().ToString();
+			output.OutputText (string.Format ("Customer's Money:\t{0}", buffer));
 
 			return customer;
-
 		}
 
 		public void ShowAllCustomers ()
@@ -106,7 +94,7 @@ namespace SGM
 			for (int i = 0; i<CustomerList.Count; i++) {
 
 				Customer customer = CustomerList [i];
-				output.OutputText (string.Format ("Customer's ID:\t\t{0}\nCustomer's First Name:\t{1}\nCustomer's Last Name:\t{2}\nCustomer's Age:\t\t{3}\nCustomer's Money:\t{4}\n", i, customer.getFirstName (), customer.getLastName (), customer.getAge (), customer.getMoney ()));
+				output.OutputText (string.Format ("Customer's ID:\t\t{0}\nCustomer's Name:\t{1}\nCustomer's Budget:\t{2}\n", i, customer.getName (), customer.getBudget()));
 			}
 
 		}
@@ -114,8 +102,8 @@ namespace SGM
 		public void ShowCustomer (int id)
 		{
 			Customer customer = CustomerList [id];
-			output.OutputText (string.Format ("Customer's ID:\t\t{0}\nCustomer's First Name:\t{1}\nCustomer's Last Name:\t{2}\nCustomer's Age:\t\t{3}\nCustomer's Money:\t{4}\n", id, customer.getFirstName (), customer.getLastName (), customer.getAge (), customer.getMoney ()));
-		}
+			output.OutputText (string.Format ("Customer's ID:\t\t{0}\nCustomer's Name:\t{1}\nCustomer's Budget:\t{2}\n", id, customer.getName (), customer.getBudget()));
+			}
 
 		public void ShowAllProducts ()
 		{
