@@ -6,9 +6,15 @@ namespace SGM
 {
 	public class Cashdesk
 	{
+		/// <summary>
+		/// Bargeldbestand der Kasse
+		/// </summary>
 		private float CashHoldings;
+
+		/// <summary>
+		/// Schlange der Kunden an der Kasse
+		/// </summary>
 		private Queue<Customer> CustomerQueue = new Queue<Customer> ();
-		private Dictionary<Customer, Order> orderQueue = new Dictionary<Customer, Order> ();
 
 		public Cashdesk (float CashHoldings)
 		{
@@ -36,28 +42,22 @@ namespace SGM
 		}
 
 		/// <summary>
-		///
+		/// Bearbeitet den nächsten Kunden
 		/// </summary>
-		/// <returns>The order.</returns>
-		public Dictionary<Customer, Order> nextOrder ()
+		/// <returns>The customer.</returns>
+		public Customer nextCustomer()
 		{
-			//Daten holen
-			Customer customer = CustomerQueue.Dequeue();
-			OrderList<Order> orderList = customer.getOrderList();
+			Customer customer = CustomerQueue.Dequeue ();
 
-			//Daten
+			List<Order> orderList = customer.getOrderList ();
 
+			return customer;
 		}
 
-		/// <summary>
-		/// Vollendet die Bestellung. Der Kunde muss nun Zahlen
-		/// </summary>
-		/// <returns>Die Bestellung</returns>
-		public Order completeOrder (Order order, Customer customer)
+		public Customer finishCustomer ()
 		{
-			customer.pay (order.getPrice ());
-
-			return order;
+			return customer;
 		}
+
 	}
 }
