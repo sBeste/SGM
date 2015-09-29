@@ -7,9 +7,10 @@ namespace SGM
 	public class Cashdesk
 	{
 		private float CashHoldings;
-		private List<Customer> CustomerList = new List<Customer> ();
+		private Queue<Customer> CustomerQueue = new Queue<Customer> ();
+		private Dictionary<Customer, Order> orderQueue = new Dictionary<Customer, Order> ();
 
-		public Cashdesk (float CashHoldings, List<Customer> CustomerList)
+		public Cashdesk (float CashHoldings)
 		{
 			this.CashHoldings = CashHoldings;
 		}
@@ -19,10 +20,10 @@ namespace SGM
 		/// </summary>
 		/// <returns>Liste aller Kunden an der Kasse</returns>
 		/// <param name="customer">Kunde</param>
-		public List<Customer> enqueueCustomer (Customer customer)
+		public Queue<Customer> enqueueCustomer (Customer customer)
 		{
-			CustomerList.Add(customer);
-			return this.CustomerList;
+			CustomerQueue.Enqueue(customer);
+			return this.CustomerQueue;
 		}
 
 		/// <summary>
@@ -32,6 +33,31 @@ namespace SGM
 		public float getCashHoldings ()
 		{
 			return this.CashHoldings;
+		}
+
+		/// <summary>
+		///
+		/// </summary>
+		/// <returns>The order.</returns>
+		public Dictionary<Customer, Order> nextOrder ()
+		{
+			//Daten holen
+			Customer customer = CustomerQueue.Dequeue();
+			OrderList<Order> orderList = customer.getOrderList();
+
+			//Daten
+
+		}
+
+		/// <summary>
+		/// Vollendet die Bestellung. Der Kunde muss nun Zahlen
+		/// </summary>
+		/// <returns>Die Bestellung</returns>
+		public Order completeOrder (Order order, Customer customer)
+		{
+			customer.pay (order.getPrice ());
+
+			return order;
 		}
 	}
 }
