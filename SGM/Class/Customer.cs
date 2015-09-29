@@ -4,54 +4,76 @@ namespace SGM
 {
 	public class Customer
 	{
-		private string firstName;
-		private string lastName;
-		private int age;
-		private int money;
+		public string name;
+		protected double budget;
+		protected static int customerNumber = 1;
+
+
 
 		public Customer ()
 		{
+			//this.budget = budget;
+
 		}
 
-		public void setFirstName(string text)
-		{
-			this.firstName = text;
+		/**
+         * Kundennamne setzen, falls kein Name gesetzt wird,
+         * wird eine Kundenzahl/Id zugeordnet.
+         */
+		public void setName(string name){
+			if (name == "") {
+				string number = customerNumber.ToString();
+				this.name = number;
+				customerNumber ++;
+			} else {
+				this.name = name;
+			}			
 		}
 
-		public string getFirstName()
-		{
-			return this.firstName;
+		/**
+         * Kundennamne wird zurückgegeben
+         * bzw. ID
+         */
+		public string getName(){
+			return this.name;
 		}
 
-		public void setLastName(string text)
-		{
-			this.lastName = text;
+		/**
+         * Berechnung neues Budget nach ausgaben
+         */
+		public void pay(double price){
+			double budget = this.budget;
+			if (price > budget) {
+				throw new CustomerNotEnoughMoneyException();
+			} else {
+				budget = budget - price;
+				this.budget = budget;
+			}
 		}
 
-		public string getLastName()
-		{
-			return this.lastName;
+		/**
+		 * Setzt das Budget des Kunden
+		 */
+		public void setBudget(double budget){
+			this.budget = budget;		
 		}
 
-		public void setAge(int number){
-
-			this.age = number;
+		/**
+         * Gibt Budget zurück 
+         */
+		public double getBudget(){
+			return this.budget;
 		}
 
-		public int getAge(){
+		/**
+		 * Gibt Bestllungsliste zurück
+		 */
 
-			return this.age;
+		/**
+		public OrderList<Order> getOrderList(){
+			return orderList;
 		}
-
-		public void setMoney(int number){
-
-			this.money = number;
-		}
-
-		public int getMoney(){
-
-			return this.money;
-		}
+		*/
 	}
 }
 
