@@ -40,6 +40,7 @@
     <Compile Include="Class\Input.cs" />
     <Compile Include="Class\Output.cs" />
     <Compile Include="Class\Product.cs" />
+    <Compile Include="Class\Cashdesk.cs" />
     <Compile Include="Class\CustomerNotEnoughMoneyException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
